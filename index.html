@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLAMA° Burger — Hamburguesas gourmet a la parrilla</title>
+<meta name="description" content="Hamburguesas gourmet ensambladas capa por capa, a la parrilla. Especial de la Casa y Doble Carne, $20.000 COP.">
+
+<!-- Tipografías: una condensada de impacto para titulares/números (Bebas Neue)
+     y una humanista para texto e interfaz (Work Sans). Dos familias, roles claros. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS — paleta y escalas
+   ============================================================ */
+:root{
+  --bg:#130f0c;            /* negro cálido, carbón */
+  --bg-alt:#1c1611;        /* panel ligeramente más claro */
+  --bg-alt-2:#221a14;
+  --ember:#ff5a1f;         /* acento fuego primario */
+  --ember-dim:#c8471a;
+  --gold:#e8a33d;          /* acento dorado (queso/pan) */
+  --gold-dim:#b57a26;
+  --pickle:#8ea339;        /* verde, uso puntual solo en pepinillos */
+  --cream:#f4ead9;         /* texto principal sobre oscuro */
+  --smoke:#a89a89;         /* texto secundario */
+  --smoke-dim:#6d6255;
+  --line:rgba(244,234,217,.12);
+  --line-strong:rgba(244,234,217,.22);
+  --shadow-hard:6px 6px 0 rgba(0,0,0,.35);
+
+  --display:'Bebas Neue', 'Arial Narrow', sans-serif;
+  --body:'Work Sans', -apple-system, 'Segoe UI', sans-serif;
+  --mono:'Courier New', ui-monospace, monospace;
+
+  --container:1120px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--cream);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  /* leve textura de grano para que el negro no sea plano */
+  background-image:
+    radial-gradient(1200px 600px at 15% -10%, rgba(255,90,31,.08), transparent 60%),
+    radial-gradient(900px 500px at 100% 10%, rgba(232,163,61,.06), transparent 55%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;}
+h1,h2,h3,p,ul{margin:0;}
+ul{padding:0;list-style:none;}
+button{font-family:inherit;cursor:pointer;}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 24px;}
+
+*:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+.section-label{
+  font-family:var(--body);
+  font-weight:600;
+  font-size:.82rem;
+  letter-spacing:.02em;
+  color:var(--ember);
+}
+
+.section-title{
+  font-family:var(--display);
+  font-size:clamp(2.1rem,5vw,3.4rem);
+  line-height:1;
+  letter-spacing:.01em;
+  color:var(--cream);
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px 26px;
+  border-radius:6px;
+  border:2px solid transparent;
+  font-family:var(--body);
+  font-weight:600;
+  font-size:.95rem;
+  text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:active{transform:translateY(2px);}
+.btn-fire{
+  background:var(--ember);
+  color:#160f0a;
+  box-shadow:var(--shadow-hard);
+}
+.btn-fire:hover{box-shadow:8px 8px 0 rgba(0,0,0,.35);transform:translate(-2px,-2px);}
+.btn-ghost{
+  background:transparent;
+  border-color:var(--line-strong);
+  color:var(--cream);
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.btn-small{padding:10px 16px;font-size:.82rem;border-radius:5px;}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(19,15,12,.86);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.site-header .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  height:72px;
+}
+.brand{
+  display:flex;align-items:baseline;gap:4px;
+  font-family:var(--display);
+  font-size:1.6rem;
+  letter-spacing:.02em;
+  text-decoration:none;
+  color:var(--cream);
+}
+.brand .deg{color:var(--ember);}
+.main-nav ul{display:flex;gap:32px;align-items:center;}
+.main-nav a{
+  font-size:.9rem;font-weight:500;color:var(--smoke);
+  text-decoration:none;transition:color .15s ease;
+}
+.main-nav a:hover{color:var(--cream);}
+.header-cta{display:flex;align-items:center;gap:18px;}
+.nav-toggle{
+  display:none;
+  background:none;border:1px solid var(--line-strong);border-radius:5px;
+  width:42px;height:42px;color:var(--cream);
+  align-items:center;justify-content:center;
+}
+.nav-toggle svg{width:20px;height:20px;}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  padding:96px 0 84px;
+  overflow:hidden;
+}
+.hero .wrap{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:48px;
+  align-items:center;
+}
+.hero-kicker{
+  font-family:var(--body);font-weight:600;font-size:.85rem;
+  color:var(--ember);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-kicker::before{content:'';width:22px;height:2px;background:var(--ember);display:inline-block;}
+.hero h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(3rem,7.2vw,5.6rem);
+  line-height:.94;
+  letter-spacing:.005em;
+  color:var(--cream);
+}
+.hero h1 span{color:var(--ember);}
+.hero p.lede{
+  margin-top:22px;
+  max-width:46ch;
+  color:var(--smoke);
+  font-size:1.05rem;
+}
+.hero-actions{margin-top:34px;display:flex;gap:16px;flex-wrap:wrap;}
+.hero-stats{
+  margin-top:46px;
+  display:flex;gap:36px;
+  border-top:1px solid var(--line);
+  padding-top:22px;
+}
+.hero-stats div b{
+  display:block;font-family:var(--display);font-size:1.9rem;color:var(--gold);
+}
+.hero-stats div span{font-size:.8rem;color:var(--smoke-dim);}
+
+/* mini quemador visual: brasas ambientales, sutiles, no intrusivas */
+.hero-visual{position:relative;height:420px;}
+.ember-field{position:absolute;inset:0;}
+.ember-dot{
+  position:absolute;bottom:0;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--ember);
+  box-shadow:0 0 12px 3px rgba(255,90,31,.55);
+  animation:rise 6s ease-in infinite;
+  opacity:0;
+}
+@keyframes rise{
+  0%{opacity:0;transform:translateY(0) scale(.6);}
+  15%{opacity:.9;}
+  90%{opacity:.15;}
+  100%{opacity:0;transform:translateY(-360px) scale(1.1);}
+}
+.hero-mini-burger{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:240px;
+}
+.hero-mini-burger .layer{border-radius:10px;}
+
+/* ============================================================
+   ANATOMÍA
+   ============================================================ */
+.anatomy{padding:108px 0;border-top:1px solid var(--line);}
+.anatomy-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  flex-wrap:wrap;margin-bottom:44px;
+}
+.anatomy-head p{color:var(--smoke);max-width:48ch;margin-top:14px;}
+
+.tabs{
+  display:inline-flex;gap:4px;
+  background:var(--bg-alt);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:4px;
+}
+.tab-btn{
+  background:none;border:none;color:var(--smoke);
+  font-family:var(--body);font-weight:600;font-size:.86rem;
+  padding:11px 18px;border-radius:6px;
+  transition:background .15s ease,color .15s ease;
+}
+.tab-btn.active{background:var(--ember);color:#160f0a;}
+.tab-btn:not(.active):hover{color:var(--cream);}
+
+.anatomy-body{
+  display:grid;
+  grid-template-columns:1fr 1.1fr;
+  gap:56px;
+  align-items:start;
+}
+.anatomy-info .price-tag{
+  font-family:var(--display);
+  font-size:3.6rem;
+  color:var(--gold);
+  line-height:1;
+}
+.anatomy-info .price-tag sup{font-size:1.1rem;font-family:var(--body);color:var(--smoke);}
+.anatomy-info h3{
+  font-family:var(--display);font-size:1.9rem;margin-top:6px;color:var(--cream);
+}
+.anatomy-info p.tagline{color:var(--smoke);margin-top:12px;max-width:40ch;}
+.anatomy-info .controls{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;}
+
+.legend{margin-top:36px;display:grid;gap:8px;}
+.legend-item{
+  display:flex;align-items:center;gap:12px;
+  padding:9px 10px;border-radius:6px;
+  border:1px solid transparent;
+  transition:background .15s ease, border-color .15s ease;
+  cursor:default;
+}
+.legend-item.active{background:var(--bg-alt);border-color:var(--line-strong);}
+.legend-num{
+  flex:none;width:24px;height:24px;border-radius:50%;
+  background:var(--bg-alt-2);border:1px solid var(--line-strong);
+  color:var(--gold);font-family:var(--body);font-weight:700;font-size:.74rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.legend-item.active .legend-num{background:var(--ember);color:#160f0a;border-color:var(--ember);}
+.legend-name{font-size:.9rem;color:var(--smoke);}
+.legend-item.active .legend-name{color:var(--cream);}
+
+.anatomy-visual{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  padding:20px 60px;
+}
+.burger-stack{
+  display:flex;flex-direction:column;align-items:center;
+  width:min(300px,70vw);
+}
+.burger-stack .layer{
+  position:relative;
+  width:100%;
+  margin-top:-16px;
+  transition:margin-top .5s cubic-bezier(.2,.8,.2,1), transform .5s ease, filter .3s ease;
+}
+.burger-stack .layer:first-child{margin-top:0;}
+.burger-stack.exploded .layer{margin-top:24px;}
+.burger-stack .layer.is-active{filter:brightness(1.18) drop-shadow(0 0 10px rgba(255,90,31,.45));transform:scale(1.035);}
+
+/* --- formas de ingredientes, 100% CSS, sin imágenes --- */
+.layer--bun-top{
+  height:74px;border-radius:60% 60% 14px 14px/100% 100% 14px 14px;
+  background:
+    radial-gradient(circle,rgba(255,255,255,.55) 0 2px,transparent 2.5px) 20% 30%/14px 14px,
+    radial-gradient(circle,rgba(255,255,255,.55) 0 2px,transparent 2.5px) 55% 20%/14px 14px,
+    radial-gradient(circle,rgba(255,255,255,.55) 0 2px,transparent 2.5px) 80% 35%/14px 14px,
+    radial-gradient(circle,rgba(255,255,255,.5) 0 2px,transparent 2.5px) 35% 45%/14px 14px,
+    radial-gradient(circle,rgba(255,255,255,.5) 0 2px,transparent 2.5px) 68% 50%/14px 14px,
+    linear-gradient(180deg,#e8a33d,#b06423);
+  box-shadow:inset 0 -8px 12px rgba(0,0,0,.35), inset 0 10px 16px rgba(255,255,255,.15);
+}
+.layer--bun-bottom{
+  height:50px;border-radius:14px 14px 46% 46%/14px 14px 90% 90%;
+  background:linear-gradient(180deg,#d9973b,#a15f1f);
+  box-shadow:inset 0 6px 10px rgba(255,255,255,.1), inset 0 -6px 8px rgba(0,0,0,.3);
+}
+.layer--pickles{
+  height:18px;border-radius:7px;
+  background:repeating-linear-gradient(90deg,#7c9130 0 16px,#9bb244 16px 26px);
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.3);
+}
+.layer--pulled-pork{
+  height:50px;border-radius:9px;
+  clip-path:polygon(0 34%,7% 8%,18% 20%,32% 2%,47% 16%,62% 0,77% 18%,90% 4%,100% 22%,100% 100%,0 100%);
+  background:
+    radial-gradient(circle at 22% 35%,#8f4a22 0 5px,transparent 6px),
+    radial-gradient(circle at 58% 60%,#7a3c1a 0 4px,transparent 5px),
+    radial-gradient(circle at 78% 30%,#8f4a22 0 4px,transparent 5px),
+    radial-gradient(circle at 38% 70%,#7a3c1a 0 3px,transparent 4px),
+    linear-gradient(180deg,#8f4a22,#652f14);
+}
+.layer--sauce-bbq{
+  height:18px;border-radius:5px;
+  clip-path:polygon(0 45%,9% 10%,22% 48%,36% 5%,50% 42%,64% 8%,78% 45%,92% 12%,100% 30%,100% 100%,0 100%);
+  background:linear-gradient(180deg,#5c1a12,#3a0d09);
+  box-shadow:inset 0 2px 2px rgba(255,255,255,.08);
+}
+.layer--cheese{
+  height:24px;
+  clip-path:polygon(0 0,100% 0,100% 45%,88% 100%,76% 45%,62% 100%,48% 45%,34% 100%,20% 45%,8% 100%,0 45%);
+  background:linear-gradient(180deg,#f4d78a,#dcb154);
+}
+.layer--cheese-mozz{
+  height:24px;
+  clip-path:polygon(0 0,100% 0,100% 45%,88% 100%,76% 45%,62% 100%,48% 45%,34% 100%,20% 45%,8% 100%,0 45%);
+  background:linear-gradient(180deg,#fbeecb,#e9cf90);
+}
+.layer--patty{
+  height:44px;border-radius:11px;
+  background:
+    repeating-linear-gradient(48deg,rgba(0,0,0,.35) 0 3px, transparent 3px 9px),
+    linear-gradient(180deg,#4b2c1c,#2c190f);
+  box-shadow:inset 0 -6px 10px rgba(0,0,0,.5), inset 0 4px 6px rgba(255,255,255,.05);
+}
+.layer--patty2{
+  height:40px;border-radius:11px;
+  background:
+    repeating-linear-gradient(-42deg,rgba(0,0,0,.35) 0 3px, transparent 3px 9px),
+    linear-gradient(180deg,#3e2417,#24140c);
+  box-shadow:inset 0 -6px 10px rgba(0,0,0,.5);
+}
+.layer--fries{
+  height:30px;border-radius:7px;
+  clip-path:polygon(0 22%,5% 0,10% 24%,15% 2%,20% 22%,25% 0,30% 24%,35% 2%,40% 22%,45% 0,50% 24%,55% 2%,60% 22%,65% 0,70% 24%,75% 2%,80% 22%,85% 0,90% 24%,95% 4%,100% 20%,100% 100%,0 100%);
+  background:repeating-linear-gradient(96deg,#e8ab3d 0 4px,#c9862a 4px 8px);
+}
+.layer--sauce-pink{
+  height:20px;border-radius:5px 5px 14px 14px;
+  background:linear-gradient(180deg,#f0a998,#dd7f66);
+}
+.layer--chicken{
+  height:44px;border-radius:16px;
+  background:
+    radial-gradient(circle at 18% 28%,#f0c877 0 8px,transparent 9px),
+    radial-gradient(circle at 46% 62%,#e2ac52 0 9px,transparent 10px),
+    radial-gradient(circle at 74% 26%,#f0c877 0 7px,transparent 8px),
+    radial-gradient(circle at 90% 60%,#e2ac52 0 7px,transparent 8px),
+    linear-gradient(180deg,#e2ac52,#c48930);
+}
+.layer--onion-rings{
+  height:38px;border-radius:12px;
+  background:
+    radial-gradient(circle at 14% 50%,transparent 6px,#caa04a 7px 11px,transparent 12px),
+    radial-gradient(circle at 38% 50%,transparent 6px,#caa04a 7px 11px,transparent 12px),
+    radial-gradient(circle at 62% 50%,transparent 6px,#caa04a 7px 11px,transparent 12px),
+    radial-gradient(circle at 86% 50%,transparent 6px,#caa04a 7px 11px,transparent 12px),
+    linear-gradient(180deg,#c9853a,#a8621f);
+}
+.layer--bacon{
+  height:18px;border-radius:5px;
+  background:repeating-linear-gradient(98deg,#8a2f22 0 6px,#c65b3f 6px 10px,#ecd2a8 10px 13px);
+}
+
+/* Etiquetas numeradas sobre cada capa */
+.badge{
+  position:absolute;top:50%;transform:translateY(-50%);
+  display:flex;align-items:center;gap:8px;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s ease;
+  transition-delay:calc(var(--i,0) * 55ms);
+  z-index:2;
+}
+.burger-stack.exploded .badge{opacity:1;pointer-events:auto;}
+.badge-right{left:100%;margin-left:16px;}
+.badge-left{right:100%;margin-right:16px;flex-direction:row-reverse;}
+.badge::before{
+  content:'';position:absolute;top:50%;width:16px;height:2px;background:var(--gold-dim);
+}
+.badge-right::before{left:-16px;}
+.badge-left::before{right:-16px;}
+.badge .num{
+  flex:none;width:24px;height:24px;border-radius:50%;
+  background:var(--ember);color:#160f0a;
+  font-family:var(--body);font-weight:700;font-size:.72rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 4px rgba(255,90,31,.18);
+  position:relative;
+}
+.badge .num::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1px solid var(--ember);opacity:.6;
+  animation:pulse-ring 2.4s ease-out infinite;
+}
+@keyframes pulse-ring{
+  0%{transform:scale(.9);opacity:.6;}
+  100%{transform:scale(1.9);opacity:0;}
+}
+.badge .lbl{
+  font-size:.76rem;color:var(--cream);white-space:nowrap;
+  background:rgba(19,15,12,.9);border:1px solid var(--line-strong);
+  padding:4px 9px;border-radius:5px;
+}
+
+.explode-toggle{
+  margin-top:34px;
+}
+
+/* ============================================================
+   MENÚ
+   ============================================================ */
+.menu{padding:108px 0;border-top:1px solid var(--line);background:var(--bg-alt);}
+.menu-head{max-width:56ch;margin-bottom:52px;}
+.menu-head p{margin-top:14px;color:var(--smoke);}
+.menu-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;
+}
+.ticket{
+  position:relative;
+  background:var(--bg);
+  border:1px solid var(--line-strong);
+  border-radius:4px;
+  padding:34px 30px 30px;
+  box-shadow:var(--shadow-hard);
+}
+/* perforación estilo boleta */
+.ticket::before,.ticket::after{
+  content:'';position:absolute;left:0;right:0;height:14px;
+  background-image:radial-gradient(circle,var(--bg-alt) 6px,transparent 6.5px);
+  background-size:22px 14px;background-repeat:repeat-x;
+}
+.ticket::before{top:-7px;}
+.ticket::after{bottom:-7px;background-image:radial-gradient(circle,var(--bg-alt) 6px,transparent 6.5px);}
+.ticket-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.ticket-top h3{font-family:var(--display);font-size:1.9rem;color:var(--cream);line-height:1.05;}
+.ticket-price{
+  font-family:var(--mono);font-weight:700;font-size:1.5rem;color:var(--gold);
+  border:1px dashed var(--gold-dim);padding:6px 10px;border-radius:4px;white-space:nowrap;
+}
+.ticket p.desc{margin-top:14px;color:var(--smoke);font-size:.92rem;}
+.ticket-list{margin-top:20px;border-top:1px dashed var(--line-strong);padding-top:16px;display:grid;gap:7px;}
+.ticket-list li{
+  display:flex;gap:10px;align-items:baseline;
+  font-size:.85rem;color:var(--smoke);
+}
+.ticket-list li b{color:var(--gold-dim);font-family:var(--mono);font-size:.78rem;}
+.ticket-actions{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;}
+
+/* ============================================================
+   NOSOTROS
+   ============================================================ */
+.about{padding:108px 0;border-top:1px solid var(--line);}
+.about .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;}
+.about-text p{color:var(--smoke);margin-top:18px;max-width:52ch;}
+.about-text .signature{
+  margin-top:28px;font-family:var(--display);font-size:1.3rem;color:var(--gold);
+}
+.about-panel{
+  background:var(--bg-alt);border:1px solid var(--line);border-radius:6px;padding:32px;
+}
+.about-panel h3{font-family:var(--display);font-size:1.4rem;color:var(--cream);margin-bottom:18px;}
+.hours-list{display:grid;gap:10px;margin-bottom:28px;}
+.hours-list li{
+  display:flex;justify-content:space-between;font-size:.9rem;
+  padding-bottom:10px;border-bottom:1px solid var(--line);color:var(--smoke);
+}
+.hours-list li span:last-child{color:var(--cream);font-weight:500;}
+.social-row{display:flex;gap:12px;}
+.social-row a{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .15s ease, transform .15s ease;
+}
+.social-row a:hover{border-color:var(--ember);transform:translateY(-2px);}
+.social-row svg{width:18px;height:18px;fill:var(--cream);}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding:44px 0;}
+footer .wrap{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+footer .brand{font-size:1.2rem;}
+footer p{color:var(--smoke-dim);font-size:.82rem;}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;}
+  .hero-visual{height:300px;order:-1;}
+  .anatomy-body{grid-template-columns:1fr;}
+  .anatomy-visual{padding:20px 10px;}
+  .badge .lbl{display:none;}
+  .badge::before{width:10px;}
+  .badge-right{margin-left:10px;}
+  .badge-left{margin-right:10px;}
+  .menu-grid{grid-template-columns:1fr;}
+  .about .wrap{grid-template-columns:1fr;}
+}
+@media (max-width:720px){
+  .main-nav,.header-cta .btn-ghost{display:none;}
+  .nav-toggle{display:flex;}
+  .site-header.nav-open .main-nav{
+    display:flex;position:absolute;top:72px;left:0;right:0;
+    background:var(--bg);border-bottom:1px solid var(--line);padding:16px 24px;
+  }
+  .site-header.nav-open .main-nav ul{flex-direction:column;align-items:flex-start;gap:18px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <a href="#inicio" class="brand">LLAMA<span class="deg">°</span> BURGER</a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#anatomia">Anatomía</a></li>
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="#menu" class="btn btn-ghost btn-small">Ver menú</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="hero-kicker">GOURMET · A LA PARRILLA · MEDELLÍN</div>
+        <h1>Capa por capa,<br>directo a la <span>llama</span>.</h1>
+        <p class="lede">Nada de atajos: pan brioche horneado, carnes a la parrilla y salsas propias, ensambladas en el orden exacto para que cada mordisco tenga las capas completas.</p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-fire">Ver el menú</a>
+          <a href="#anatomia" class="btn btn-ghost">Explorar la anatomía</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>2</b><span>referencias en la carta</span></div>
+          <div><b>$20K</b><span>precio único COP</span></div>
+          <div><b>100%</b><span>armadas al pedido</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="ember-field" id="emberField"></div>
+        <div class="hero-mini-burger">
+          <div class="layer layer--bun-top"></div>
+          <div class="layer layer--sauce-bbq" style="margin-top:-10px"></div>
+          <div class="layer layer--cheese" style="margin-top:-8px"></div>
+          <div class="layer layer--patty" style="margin-top:-10px"></div>
+          <div class="layer layer--fries" style="margin-top:-8px"></div>
+          <div class="layer layer--bun-bottom" style="margin-top:-8px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ANATOMÍA INTERACTIVA
+       ============================================================ -->
+  <section class="anatomy" id="anatomia">
+    <div class="wrap">
+      <div class="anatomy-head">
+        <div>
+          <div class="section-label">ANATOMÍA DE LA HAMBURGUESA</div>
+          <h2 class="section-title">Así se arma, capa por capa</h2>
+          <p>Elige una referencia y observa cómo se separa cada ingrediente en el orden real de ensamblaje.</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Elegir hamburguesa">
+          <button class="tab-btn active" data-burger="especial" role="tab" aria-selected="true">Especial de la Casa</button>
+          <button class="tab-btn" data-burger="doble" role="tab" aria-selected="false">Doble Carne</button>
+        </div>
+      </div>
+
+      <div class="anatomy-body">
+        <div class="anatomy-info">
+          <p class="price-tag"><sup>$</sup><span id="infoPrice">20.000</span></p>
+          <h3 id="infoName">Especial de la Casa</h3>
+          <p class="tagline" id="infoTagline">Cerdo desmechado bañado en BBQ, sobre carne a la parrilla y papas crispy.</p>
+          <div class="controls">
+            <button class="btn btn-fire btn-small" id="explodeBtn">Separar capas</button>
+            <a href="#" class="btn btn-ghost btn-small" id="infoWhatsapp">Pedir esta por WhatsApp</a>
+          </div>
+          <div class="legend" id="legend" aria-label="Lista de ingredientes"></div>
+        </div>
+
+        <div class="anatomy-visual">
+          <div class="burger-stack" id="burgerStack"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MENÚ Y PRECIOS
+       ============================================================ -->
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <div class="menu-head">
+        <div class="section-label">LA CARTA</div>
+        <h2 class="section-title">Dos referencias, un solo precio</h2>
+        <p>Ambas hamburguesas se arman al momento con pan brioche, carne a la parrilla y salsas propias. Elige la tuya.</p>
+      </div>
+
+      <div class="menu-grid">
+
+        <article class="ticket">
+          <div class="ticket-top">
+            <h3>Especial<br>de la Casa</h3>
+            <span class="ticket-price">$20.000</span>
+          </div>
+          <p class="desc">Pan brioche, pepinillos, cerdo desmechado en BBQ, queso, carne a la parrilla, papas crispy y salsa rosada.</p>
+          <ul class="ticket-list">
+            <li><b>01</b> Carne desmechada de cerdo en BBQ</li>
+            <li><b>02</b> Carne de hamburguesa a la parrilla</li>
+            <li><b>03</b> Papas crispy y salsa rosada</li>
+          </ul>
+          <div class="ticket-actions">
+            <button class="btn btn-fire btn-small" data-ver-anatomia="especial">Ver anatomía</button>
+            <a href="#" class="btn btn-ghost btn-small" data-whatsapp="Especial de la Casa">Pedir por WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="ticket">
+          <div class="ticket-top">
+            <h3>Doble<br>Carne</h3>
+            <span class="ticket-price">$20.000</span>
+          </div>
+          <p class="desc">Pan artesanal, pollo empanado, aros de cebolla BBQ, mozzarella, tocino, doble carne, ripio de papa y salsa rosada ahumada.</p>
+          <ul class="ticket-list">
+            <li><b>01</b> Tiras de pollo empanado + aros BBQ</li>
+            <li><b>02</b> Carne mixta + segunda carne de res</li>
+            <li><b>03</b> Tocino, mozzarella y ripio de papa</li>
+          </ul>
+          <div class="ticket-actions">
+            <button class="btn btn-fire btn-small" data-ver-anatomia="doble">Ver anatomía</button>
+            <a href="#" class="btn btn-ghost btn-small" data-whatsapp="Doble Carne">Pedir por WhatsApp</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SOBRE NOSOTROS
+       ============================================================ -->
+  <section class="about" id="nosotros">
+    <div class="wrap">
+      <div class="about-text">
+        <div class="section-label">NUESTRA PASIÓN</div>
+        <h2 class="section-title">Empezamos con una parrilla y una idea simple</h2>
+        <p>Creemos que una buena hamburguesa se nota en el orden: cada capa cumple un rol y se pone donde debe ir. Por eso armamos las nuestras siguiendo la misma secuencia cada vez, sin saltarnos nada, sin apurar el pan.</p>
+        <p>Todo se prepara al momento del pedido, con carnes a la parrilla y salsas que hacemos nosotros mismos.</p>
+        <p class="signature">— El equipo de LLAMA° Burger</p>
+      </div>
+      <div class="about-panel">
+        <h3>Horario de atención</h3>
+        <ul class="hours-list">
+          <li><span>Martes a jueves</span><span>5:00 p. m. – 10:00 p. m.</span></li>
+          <li><span>Viernes y sábado</span><span>5:00 p. m. – 11:30 p. m.</span></li>
+          <li><span>Domingo</span><span>1:00 p. m. – 9:00 p. m.</span></li>
+          <li><span>Lunes</span><span>Cerrado</span></li>
+        </ul>
+        <h3>Síguenos</h3>
+        <div class="social-row">
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 3 17.6L2 22l4.5-1.2A11 11 0 1 0 20.5 3.5Zm-8.4 16.8a9.1 9.1 0 0 1-4.6-1.2l-.3-.2-3.1.8.8-3-.2-.3a9.2 9.2 0 1 1 7.4 3.9Zm5-6.9c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1s-.7.9-.9 1.1-.3.2-.6.1a7.4 7.4 0 0 1-3.6-3.2c-.3-.5.3-.5.8-1.6a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-2-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3 1 2.6 1.1 2.8.1.2 2 3 4.8 4.2a5.6 5.6 0 0 0 3.5.7 3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c2.7 0 3 0 4 .1 1.1 0 1.8.2 2.4.4a5 5 0 0 1 2.9 2.9c.2.6.4 1.3.4 2.4.1 1 .1 1.3.1 4s0 3-.1 4c0 1.1-.2 1.8-.4 2.4a5 5 0 0 1-2.9 2.9c-.6.2-1.3.4-2.4.4-1 .1-1.3.1-4 .1s-3 0-4-.1c-1.1 0-1.8-.2-2.4-.4a5 5 0 0 1-2.9-2.9c-.2-.6-.4-1.3-.4-2.4-.1-1-.1-1.3-.1-4s0-3 .1-4c0-1.1.2-1.8.4-2.4a5 5 0 0 1 2.9-2.9c.6-.2 1.3-.4 2.4-.4 1-.1 1.3-.1 4-.1Zm0 1.8c-2.6 0-2.9 0-4 .1-.9 0-1.4.2-1.7.3a3 3 0 0 0-1.7 1.7c-.1.3-.3.8-.3 1.7-.1 1.1-.1 1.4-.1 4s0 2.9.1 4c0 .9.2 1.4.3 1.7a3 3 0 0 0 1.7 1.7c.3.1.8.3 1.7.3 1.1.1 1.4.1 4 .1s2.9 0 4-.1c.9 0 1.4-.2 1.7-.3a3 3 0 0 0 1.7-1.7c.1-.3.3-.8.3-1.7.1-1.1.1-1.4.1-4s0-2.9-.1-4c0-.9-.2-1.4-.3-1.7a3 3 0 0 0-1.7-1.7c-.3-.1-.8-.3-1.7-.3-1.1-.1-1.4-.1-4-.1Zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.1 3.1 0 1 0 0 6.3 3.1 3.1 0 0 0 0-6.3Zm5.2-2a1.2 1.2 0 1 1-2.3 0 1.2 1.2 0 0 1 2.3 0Z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8.1h2.7l.4-3.2h-3.1V8.6c0-.9.3-1.6 1.6-1.6h1.7V4.1A21 21 0 0 0 14.3 4c-2.5 0-4.3 1.6-4.3 4.4v2.3H7.3v3.2h2.7V22h3.5Z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#inicio" class="brand">LLAMA<span class="deg">°</span> BURGER</a>
+    <p id="footerNote">Medellín, Colombia · Pedidos por WhatsApp</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   DATOS DE LAS HAMBURGUESAS
+   Cada capa define: número, nombre, forma visual (clase CSS)
+   y lado donde aparece su etiqueta (para alternar izquierda/derecha).
+   ============================================================ */
+const BURGERS = {
+  especial: {
+    name: "Especial de la Casa",
+    price: "20.000",
+    tagline: "Cerdo desmechado bañado en BBQ, sobre carne a la parrilla y papas crispy.",
+    layers: [
+      { n: 1, name: "Pan superior (brioche)", shape: "bun-top", side: "right" },
+      { n: 2, name: "Pepinillos", shape: "pickles", side: "left" },
+      { n: 3, name: "Carne desmechada (cerdo)", shape: "pulled-pork", side: "right" },
+      { n: 4, name: "Salsa BBQ", shape: "sauce-bbq", side: "left" },
+      { n: 5, name: "Queso", shape: "cheese", side: "right" },
+      { n: 6, name: "Carne de hamburguesa", shape: "patty", side: "left" },
+      { n: 7, name: "Papas crispy (crocantes)", shape: "fries", side: "right" },
+      { n: 8, name: "Salsa rosada", shape: "sauce-pink", side: "left" },
+      { n: 9, name: "Pan inferior (brioche)", shape: "bun-bottom", side: "right" }
+    ]
+  },
+  doble: {
+    name: "Doble Carne",
+    price: "20.000",
+    tagline: "Dos carnes, pollo empanado, aros BBQ y tocino, entre pan artesanal.",
+    layers: [
+      { n: 1, name: "Pan artesanal brioche", shape: "bun-top", side: "right" },
+      { n: 2, name: "Tiras de pollo empanado", shape: "chicken", side: "left" },
+      { n: 3, name: "Aros de cebolla apanados BBQ", shape: "onion-rings", side: "right" },
+      { n: 4, name: "Salsa BBQ", shape: "sauce-bbq", side: "left" },
+      { n: 5, name: "Queso mozzarella", shape: "cheese-mozz", side: "right" },
+      { n: 6, name: "Tocino", shape: "bacon", side: "left" },
+      { n: 7, name: "Carne mixta", shape: "patty", side: "right" },
+      { n: 8, name: "Segunda carne (carne de res)", shape: "patty2", side: "left" },
+      { n: 9, name: "Ripio de papa", shape: "fries", side: "right" },
+      { n: 10, name: "Salsa rosada y mayonesa ahumada", shape: "sauce-pink", side: "left" },
+      { n: 11, name: "Pan inferior brioche", shape: "bun-bottom", side: "right" }
+    ]
+  }
+};
+
+/* ⚠️ Reemplaza este número por el WhatsApp real del negocio (código país + número, sin +) */
+const WHATSAPP_NUMBER = "573002548760";
+
+const stackEl = document.getElementById("burgerStack");
+const legendEl = document.getElementById("legend");
+const infoPrice = document.getElementById("infoPrice");
+const infoName = document.getElementById("infoName");
+const infoTagline = document.getElementById("infoTagline");
+const infoWhatsapp = document.getElementById("infoWhatsapp");
+const explodeBtn = document.getElementById("explodeBtn");
+const tabs = document.querySelectorAll(".tab-btn");
+
+let currentBurger = "especial";
+let isExploded = false;
+
+function waLink(burgerName){
+  const msg = encodeURIComponent(`Hola, quiero pedir la hamburguesa ${burgerName} ($20.000). Confírmame los pasos, por favor.`);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+}
+
+function renderBurger(key){
+  const data = BURGERS[key];
+  currentBurger = key;
+
+  // Info lateral
+  infoPrice.textContent = data.price;
+  infoName.textContent = data.name;
+  infoTagline.textContent = data.tagline;
+  infoWhatsapp.href = waLink(data.name);
+
+  // Pestañas
+  tabs.forEach(t => {
+    const active = t.dataset.burger === key;
+    t.classList.toggle("active", active);
+    t.setAttribute("aria-selected", active);
+  });
+
+  // Capas de la hamburguesa
+  stackEl.innerHTML = "";
+  data.layers.forEach((layer, i) => {
+    const div = document.createElement("div");
+    div.className = `layer layer--${layer.shape}`;
+    div.style.setProperty("--i", i);
+    div.dataset.index = i;
+
+    const badge = document.createElement("div");
+    badge.className = `badge badge-${layer.side}`;
+    badge.innerHTML = `<span class="num">${layer.n}</span><span class="lbl">${layer.name}</span>`;
+    div.appendChild(badge);
+
+    div.addEventListener("mouseenter", () => setActive(i));
+    div.addEventListener("mouseleave", () => setActive(null));
+    stackEl.appendChild(div);
+  });
+  stackEl.classList.toggle("exploded", isExploded);
+
+  // Leyenda
+  legendEl.innerHTML = "";
+  data.layers.forEach((layer, i) => {
+    const item = document.createElement("div");
+    item.className = "legend-item";
+    item.dataset.index = i;
+    item.innerHTML = `<span class="legend-num">${layer.n}</span><span class="legend-name">${layer.name}</span>`;
+    item.addEventListener("mouseenter", () => setActive(i));
+    item.addEventListener("mouseleave", () => setActive(null));
+    legendEl.appendChild(item);
+  });
+}
+
+function setActive(index){
+  document.querySelectorAll(".burger-stack .layer").forEach(l => {
+    l.classList.toggle("is-active", Number(l.dataset.index) === index);
+  });
+  document.querySelectorAll(".legend-item").forEach(l => {
+    l.classList.toggle("active", Number(l.dataset.index) === index);
+  });
+}
+
+function setExploded(state){
+  isExploded = state;
+  stackEl.classList.toggle("exploded", isExploded);
+  explodeBtn.textContent = isExploded ? "Ensamblar de nuevo" : "Separar capas";
+}
+
+// Pestañas
+tabs.forEach(t => t.addEventListener("click", () => renderBurger(t.dataset.burger)));
+
+// Botón separar / ensamblar
+explodeBtn.addEventListener("click", () => setExploded(!isExploded));
+
+// Al entrar en vista la sección de anatomía, un único momento de animación automática
+const anatomySection = document.getElementById("anatomia");
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !isExploded){
+      setExploded(true);
+      io.disconnect();
+    }
+  });
+}, { threshold: .4 });
+io.observe(anatomySection);
+
+// Botones "Ver anatomía" del menú: cambian de pestaña, hacen scroll y explotan
+document.querySelectorAll("[data-ver-anatomia]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    renderBurger(btn.dataset.verAnatomia);
+    setExploded(true);
+    document.getElementById("anatomia").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+// Botones "Pedir por WhatsApp" del menú
+document.querySelectorAll("[data-whatsapp]").forEach(a => {
+  a.href = waLink(a.dataset.whatsapp);
+});
+
+// Menú móvil
+const navToggle = document.getElementById("navToggle");
+const siteHeader = document.getElementById("siteHeader");
+navToggle.addEventListener("click", () => siteHeader.classList.toggle("nav-open"));
+
+// Brasas ambientales del hero
+const emberField = document.getElementById("emberField");
+for (let i = 0; i < 10; i++){
+  const dot = document.createElement("div");
+  dot.className = "ember-dot";
+  dot.style.left = `${10 + Math.random() * 80}%`;
+  dot.style.animationDelay = `${Math.random() * 6}s`;
+  dot.style.animationDuration = `${5 + Math.random() * 3}s`;
+  emberField.appendChild(dot);
+}
+
+// Año del footer
+document.getElementById("footerNote").textContent =
+  `Medellín, Colombia · Pedidos por WhatsApp · © ${new Date().getFullYear()} LLAMA° Burger`;
+
+// Render inicial
+renderBurger("especial");
+</script>
+
+</body>
+</html>
