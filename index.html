@@ -298,102 +298,14 @@ button{font-family:inherit;cursor:pointer;}
   transition:margin-top .5s cubic-bezier(.2,.8,.2,1), transform .5s ease, filter .3s ease;
 }
 .burger-stack .layer:first-child{margin-top:0;}
+.burger-stack .layer{z-index:calc(40 - var(--i,0));}
 .burger-stack.exploded .layer{margin-top:24px;}
 .burger-stack .layer.is-active{filter:brightness(1.18) drop-shadow(0 0 10px rgba(255,90,31,.45));transform:scale(1.035);}
 
-/* --- formas de ingredientes, 100% CSS, sin imágenes --- */
-.layer--bun-top{
-  height:74px;border-radius:60% 60% 14px 14px/100% 100% 14px 14px;
-  background:
-    radial-gradient(circle,rgba(255,255,255,.55) 0 2px,transparent 2.5px) 20% 30%/14px 14px,
-    radial-gradient(circle,rgba(255,255,255,.55) 0 2px,transparent 2.5px) 55% 20%/14px 14px,
-    radial-gradient(circle,rgba(255,255,255,.55) 0 2px,transparent 2.5px) 80% 35%/14px 14px,
-    radial-gradient(circle,rgba(255,255,255,.5) 0 2px,transparent 2.5px) 35% 45%/14px 14px,
-    radial-gradient(circle,rgba(255,255,255,.5) 0 2px,transparent 2.5px) 68% 50%/14px 14px,
-    linear-gradient(180deg,#e8a33d,#b06423);
-  box-shadow:inset 0 -8px 12px rgba(0,0,0,.35), inset 0 10px 16px rgba(255,255,255,.15);
-}
-.layer--bun-bottom{
-  height:50px;border-radius:14px 14px 46% 46%/14px 14px 90% 90%;
-  background:linear-gradient(180deg,#d9973b,#a15f1f);
-  box-shadow:inset 0 6px 10px rgba(255,255,255,.1), inset 0 -6px 8px rgba(0,0,0,.3);
-}
-.layer--pickles{
-  height:18px;border-radius:7px;
-  background:repeating-linear-gradient(90deg,#7c9130 0 16px,#9bb244 16px 26px);
-  box-shadow:inset 0 2px 4px rgba(0,0,0,.3);
-}
-.layer--pulled-pork{
-  height:50px;border-radius:9px;
-  clip-path:polygon(0 34%,7% 8%,18% 20%,32% 2%,47% 16%,62% 0,77% 18%,90% 4%,100% 22%,100% 100%,0 100%);
-  background:
-    radial-gradient(circle at 22% 35%,#8f4a22 0 5px,transparent 6px),
-    radial-gradient(circle at 58% 60%,#7a3c1a 0 4px,transparent 5px),
-    radial-gradient(circle at 78% 30%,#8f4a22 0 4px,transparent 5px),
-    radial-gradient(circle at 38% 70%,#7a3c1a 0 3px,transparent 4px),
-    linear-gradient(180deg,#8f4a22,#652f14);
-}
-.layer--sauce-bbq{
-  height:18px;border-radius:5px;
-  clip-path:polygon(0 45%,9% 10%,22% 48%,36% 5%,50% 42%,64% 8%,78% 45%,92% 12%,100% 30%,100% 100%,0 100%);
-  background:linear-gradient(180deg,#5c1a12,#3a0d09);
-  box-shadow:inset 0 2px 2px rgba(255,255,255,.08);
-}
-.layer--cheese{
-  height:24px;
-  clip-path:polygon(0 0,100% 0,100% 45%,88% 100%,76% 45%,62% 100%,48% 45%,34% 100%,20% 45%,8% 100%,0 45%);
-  background:linear-gradient(180deg,#f4d78a,#dcb154);
-}
-.layer--cheese-mozz{
-  height:24px;
-  clip-path:polygon(0 0,100% 0,100% 45%,88% 100%,76% 45%,62% 100%,48% 45%,34% 100%,20% 45%,8% 100%,0 45%);
-  background:linear-gradient(180deg,#fbeecb,#e9cf90);
-}
-.layer--patty{
-  height:44px;border-radius:11px;
-  background:
-    repeating-linear-gradient(48deg,rgba(0,0,0,.35) 0 3px, transparent 3px 9px),
-    linear-gradient(180deg,#4b2c1c,#2c190f);
-  box-shadow:inset 0 -6px 10px rgba(0,0,0,.5), inset 0 4px 6px rgba(255,255,255,.05);
-}
-.layer--patty2{
-  height:40px;border-radius:11px;
-  background:
-    repeating-linear-gradient(-42deg,rgba(0,0,0,.35) 0 3px, transparent 3px 9px),
-    linear-gradient(180deg,#3e2417,#24140c);
-  box-shadow:inset 0 -6px 10px rgba(0,0,0,.5);
-}
-.layer--fries{
-  height:30px;border-radius:7px;
-  clip-path:polygon(0 22%,5% 0,10% 24%,15% 2%,20% 22%,25% 0,30% 24%,35% 2%,40% 22%,45% 0,50% 24%,55% 2%,60% 22%,65% 0,70% 24%,75% 2%,80% 22%,85% 0,90% 24%,95% 4%,100% 20%,100% 100%,0 100%);
-  background:repeating-linear-gradient(96deg,#e8ab3d 0 4px,#c9862a 4px 8px);
-}
-.layer--sauce-pink{
-  height:20px;border-radius:5px 5px 14px 14px;
-  background:linear-gradient(180deg,#f0a998,#dd7f66);
-}
-.layer--chicken{
-  height:44px;border-radius:16px;
-  background:
-    radial-gradient(circle at 18% 28%,#f0c877 0 8px,transparent 9px),
-    radial-gradient(circle at 46% 62%,#e2ac52 0 9px,transparent 10px),
-    radial-gradient(circle at 74% 26%,#f0c877 0 7px,transparent 8px),
-    radial-gradient(circle at 90% 60%,#e2ac52 0 7px,transparent 8px),
-    linear-gradient(180deg,#e2ac52,#c48930);
-}
-.layer--onion-rings{
-  height:38px;border-radius:12px;
-  background:
-    radial-gradient(circle at 14% 50%,transparent 6px,#caa04a 7px 11px,transparent 12px),
-    radial-gradient(circle at 38% 50%,transparent 6px,#caa04a 7px 11px,transparent 12px),
-    radial-gradient(circle at 62% 50%,transparent 6px,#caa04a 7px 11px,transparent 12px),
-    radial-gradient(circle at 86% 50%,transparent 6px,#caa04a 7px 11px,transparent 12px),
-    linear-gradient(180deg,#c9853a,#a8621f);
-}
-.layer--bacon{
-  height:18px;border-radius:5px;
-  background:repeating-linear-gradient(98deg,#8a2f22 0 6px,#c65b3f 6px 10px,#ecd2a8 10px 13px);
-}
+/* --- ilustraciones de ingredientes (SVG con volumen, textura y brillo) ---
+   Cada .layer recibe su dibujo desde ING.svg(); la altura sale de la
+   proporción del dibujo, así escala bien en móvil y en el hero. */
+.layer > svg.ing{display:block;width:100%;height:auto;overflow:visible;}
 
 /* Etiquetas numeradas sobre cada capa */
 .badge{
@@ -735,6 +647,390 @@ footer p{color:var(--smoke-dim);font-size:.82rem;}
 
 <script>
 /* ============================================================
+   ILUSTRACIONES DE INGREDIENTES
+   Cada capa se dibuja como SVG vectorial con volumen (degradados),
+   textura (ruido fractal), brillos y sombras, para un aspecto más
+   realista que las formas planas. Todo queda dentro del HTML: no
+   hay archivos de imagen externos.
+   ============================================================ */
+const ING = (() => {
+  /* Aleatorio con semilla: las formas salen idénticas en cada carga */
+  function rng(seed){
+    return () => {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const f = v => Math.round(v * 10) / 10;
+  const between = (r, a, b) => a + r() * (b - a);
+  const pick = (r, arr) => arr[Math.floor(r() * arr.length)];
+
+  /* ---------- Definiciones compartidas (degradados y filtros) ---------- */
+  const DEFS = `
+<svg width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false"><defs>
+  <!-- grano fino: oscurece levemente con ruido para quitar el aspecto plano -->
+  <filter id="lb-grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .45 -.1" result="na"/>
+    <feComposite in="na" in2="SourceGraphic" operator="in" result="nm"/>
+    <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="nm"/></feMerge>
+  </filter>
+  <!-- bordes orgánicos (carne desmechada, hilos) -->
+  <filter id="lb-rough" x="-5%" y="-25%" width="110%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="2" seed="7" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <!-- costra: bordes irregulares + poro/grano (carne, apanados) -->
+  <filter id="lb-crust" x="-6%" y="-25%" width="112%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="11" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="4" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .7 -.15" result="na"/>
+    <feComposite in="na" in2="d" operator="in" result="nm"/>
+    <feMerge><feMergeNode in="d"/><feMergeNode in="nm"/></feMerge>
+  </filter>
+  <filter id="lb-blur" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
+  <filter id="lb-blur-s" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="1.2"/></filter>
+
+  <!-- brillo especular y sombra inferior genéricos -->
+  <radialGradient id="lb-hl"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  <linearGradient id="lb-shade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/>
+  </linearGradient>
+
+  <!-- pan -->
+  <linearGradient id="lb-bun-dome" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f7c873"/><stop offset=".3" stop-color="#e29a3f"/><stop offset=".72" stop-color="#ad5b1d"/><stop offset="1" stop-color="#7a3b11"/>
+  </linearGradient>
+  <linearGradient id="lb-bun-base" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#e7aa55"/><stop offset=".55" stop-color="#bd6d2c"/><stop offset="1" stop-color="#7c3e13"/>
+  </linearGradient>
+  <linearGradient id="lb-crumb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8e6bb"/><stop offset="1" stop-color="#d9b06c"/></linearGradient>
+  <radialGradient id="lb-toast" cx=".5" cy=".5" r=".6">
+    <stop offset="0" stop-color="#c47a30"/><stop offset=".6" stop-color="#dfa457"/><stop offset="1" stop-color="#f1cf91"/>
+  </radialGradient>
+
+  <!-- vegetales -->
+  <radialGradient id="lb-pickle"><stop offset="0" stop-color="#c3d671"/><stop offset=".7" stop-color="#88a537"/><stop offset="1" stop-color="#58731f"/></radialGradient>
+
+  <!-- carnes -->
+  <linearGradient id="lb-pork" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9683a"/><stop offset=".6" stop-color="#8a4220"/><stop offset="1" stop-color="#5a2610"/></linearGradient>
+  <linearGradient id="lb-patty-side" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e4027"/><stop offset=".5" stop-color="#4a2615"/><stop offset="1" stop-color="#26120a"/></linearGradient>
+  <radialGradient id="lb-patty-top" cx=".45" cy=".4" r=".65"><stop offset="0" stop-color="#7d4b2c"/><stop offset=".7" stop-color="#55301a"/><stop offset="1" stop-color="#2f170b"/></radialGradient>
+  <linearGradient id="lb-patty2-side" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5c3420"/><stop offset=".5" stop-color="#3a1d10"/><stop offset="1" stop-color="#1d0d06"/></linearGradient>
+  <radialGradient id="lb-patty2-top" cx=".55" cy=".4" r=".65"><stop offset="0" stop-color="#6c3f24"/><stop offset=".7" stop-color="#462414"/><stop offset="1" stop-color="#26120a"/></radialGradient>
+  <clipPath id="lb-cp-top"><ellipse cx="150" cy="16" rx="140" ry="11"/></clipPath>
+  <linearGradient id="lb-bacon" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#6e1d10"/><stop offset=".22" stop-color="#b23f27"/><stop offset=".42" stop-color="#eecfa0"/>
+    <stop offset=".55" stop-color="#e8b98a"/><stop offset=".7" stop-color="#bf4a2f"/><stop offset="1" stop-color="#7a2414"/>
+  </linearGradient>
+  <radialGradient id="lb-chicken" cx=".42" cy=".32" r=".7"><stop offset="0" stop-color="#f9d98e"/><stop offset=".55" stop-color="#e2a446"/><stop offset="1" stop-color="#a86626"/></radialGradient>
+  <linearGradient id="lb-ring" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6cf86"/><stop offset=".55" stop-color="#cf8e3c"/><stop offset="1" stop-color="#8c5020"/></linearGradient>
+
+  <!-- quesos y salsas -->
+  <linearGradient id="lb-cheddar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffdb64"/><stop offset=".6" stop-color="#f5ab2c"/><stop offset="1" stop-color="#d98012"/></linearGradient>
+  <linearGradient id="lb-mozz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffbf1"/><stop offset=".65" stop-color="#f2e3bf"/><stop offset="1" stop-color="#d9c08a"/></linearGradient>
+  <linearGradient id="lb-bbq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#83301a"/><stop offset=".5" stop-color="#4a1209"/><stop offset="1" stop-color="#250703"/></linearGradient>
+  <linearGradient id="lb-pink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbc8b6"/><stop offset=".6" stop-color="#ee9c86"/><stop offset="1" stop-color="#d4715c"/></linearGradient>
+
+  <!-- papa -->
+  <linearGradient id="lb-fry" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe397"/><stop offset=".5" stop-color="#f1b64a"/><stop offset="1" stop-color="#c27c1e"/></linearGradient>
+</defs></svg>`;
+
+  const wrap = (h, inner) =>
+    `<svg class="ing" viewBox="0 0 300 ${h}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">${inner}</svg>`;
+
+  const ellipsePath = (cx, cy, rx, ry) =>
+    `M${f(cx - rx)} ${f(cy)}a${f(rx)} ${f(ry)} 0 1 0 ${f(2 * rx)} 0a${f(rx)} ${f(ry)} 0 1 0 ${f(-2 * rx)} 0Z`;
+
+  /* ---------- Pan superior: domo brillante con ajonjolí ---------- */
+  function bunTop(){
+    const r = rng(21);
+    const dome = "M8 82 C8 26 72 4 150 4 C228 4 292 26 292 82 Q292 88 280 88 L20 88 Q8 88 8 82Z";
+    let seeds = "";
+    for (let i = 0; i < 28; i++){
+      const x = between(r, 42, 258);
+      const dx = (x - 150) / 142;
+      const top = 4 + 70 * dx * dx;
+      const y = between(r, top + 9, Math.min(74, top + 46));
+      const a = between(r, -28, 28);
+      const sx = 1 - Math.abs(dx) * .45;
+      seeds += `<g transform="translate(${f(x)} ${f(y)}) rotate(${f(a)}) scale(${f(sx)} 1)">
+        <ellipse cx=".8" cy="1.3" rx="4.6" ry="2.3" fill="#4a2208" opacity=".35"/>
+        <ellipse rx="4.6" ry="2.3" fill="#fbf0d3"/>
+        <ellipse cx="-1.1" cy="-.7" rx="2.1" ry=".8" fill="#fff" opacity=".85"/></g>`;
+    }
+    return wrap(96, `
+      <ellipse cx="150" cy="89" rx="138" ry="7" fill="url(#lb-crumb)" filter="url(#lb-grain)"/>
+      <path d="${dome}" fill="url(#lb-bun-dome)" filter="url(#lb-grain)"/>
+      <path d="${dome}" fill="url(#lb-shade)"/>
+      <ellipse cx="118" cy="28" rx="74" ry="18" fill="url(#lb-hl)"/>
+      <path d="M40 60 Q60 22 120 12" fill="none" stroke="#fff3d6" stroke-width="3" stroke-linecap="round" opacity=".25" filter="url(#lb-blur-s)"/>
+      ${seeds}`);
+  }
+
+  /* ---------- Pan inferior: cara tostada + costado ---------- */
+  function bunBottom(){
+    const body = "M8 14 L8 38 C8 56 36 60 150 60 C264 60 292 56 292 38 L292 14 Z";
+    return wrap(62, `
+      <path d="${body}" fill="url(#lb-bun-base)" filter="url(#lb-grain)"/>
+      <path d="${body}" fill="url(#lb-shade)"/>
+      <path d="M22 26 Q26 46 70 52" fill="none" stroke="#ffe2a8" stroke-width="3" stroke-linecap="round" opacity=".25" filter="url(#lb-blur-s)"/>
+      <ellipse cx="150" cy="14" rx="142" ry="11" fill="url(#lb-toast)" filter="url(#lb-grain)"/>
+      <ellipse cx="150" cy="14" rx="141" ry="10.5" fill="none" stroke="#9a5418" stroke-width="1.4" opacity=".6"/>`);
+  }
+
+  /* ---------- Pepinillos: rodajas onduladas translúcidas ---------- */
+  function pickles(){
+    const r = rng(5);
+    let out = `<ellipse cx="150" cy="24" rx="138" ry="5" fill="#000" opacity=".35" filter="url(#lb-blur)"/>`;
+    for (let i = 0; i < 8; i++){
+      const x = 32 + i * 33.5 + between(r, -3, 3);
+      const y = 15 + between(r, -2.5, 2.5);
+      const a = between(r, -9, 9);
+      let seeds = "";
+      for (let k = 0; k < 5; k++){
+        const t = (k / 5) * Math.PI * 2 + between(r, 0, .5);
+        seeds += `<ellipse cx="${f(Math.cos(t) * 10)}" cy="${f(Math.sin(t) * 3.4)}" rx="1.6" ry=".9" fill="#eef3c4" opacity=".85"/>`;
+      }
+      out += `<g transform="translate(${f(x)} ${f(y)}) rotate(${f(a)})">
+        <ellipse rx="24" ry="9" fill="#46601a" stroke="#2f420e" stroke-width="1.6" stroke-dasharray="2.6 1.8"/>
+        <ellipse rx="19.5" ry="6.6" fill="url(#lb-pickle)"/>
+        <ellipse rx="9" ry="3" fill="#dbe7a0" opacity=".5"/>${seeds}
+        <ellipse cx="-7" cy="-3.6" rx="8" ry="1.5" fill="#fff" opacity=".45"/></g>`;
+    }
+    return wrap(30, out);
+  }
+
+  /* ---------- Cerdo desmechado: montículo de hebras glaseadas ---------- */
+  function pulledPork(){
+    const r = rng(9);
+    let top = "M10 50 L10 22";
+    for (let x = 10; x <= 290; x += 20){
+      const y = between(r, 6, 18);
+      top += ` Q${f(x + 10)} ${f(y - 6)} ${f(Math.min(x + 20, 290))} ${f(y)}`;
+    }
+    const blob = `${top} L290 50 C290 56 270 58 150 58 C30 58 10 56 10 50Z`;
+    const cols = ["#c97a42", "#9a4b24", "#6e2f14", "#dc905a", "#5a230e", "#b05d2f"];
+    let shreds = "";
+    for (let i = 0; i < 90; i++){
+      const x = between(r, 18, 282), y = between(r, 14, 52);
+      const len = between(r, 14, 38), a = between(r, -28, 28) * Math.PI / 180;
+      const x2 = x + Math.cos(a) * len, y2 = y + Math.sin(a) * len * .5;
+      const cx = (x + x2) / 2 + between(r, -6, 6), cy = (y + y2) / 2 + between(r, -5, 5);
+      shreds += `<path d="M${f(x)} ${f(y)} Q${f(cx)} ${f(cy)} ${f(x2)} ${f(y2)}" stroke="${pick(r, cols)}" stroke-width="${f(between(r, 1.8, 4.4))}" opacity=".9"/>`;
+    }
+    let gloss = "";
+    for (let i = 0; i < 22; i++){
+      const x = between(r, 25, 275), y = between(r, 14, 44), len = between(r, 8, 20);
+      gloss += `<path d="M${f(x)} ${f(y)} q${f(len / 2)} ${f(between(r, -3, 3))} ${f(len)} ${f(between(r, -2, 2))}" stroke="#ffc796" stroke-width="1.1" opacity=".55"/>`;
+    }
+    return wrap(62, `
+      <ellipse cx="150" cy="56" rx="140" ry="5" fill="#000" opacity=".4" filter="url(#lb-blur)"/>
+      <path d="${blob}" fill="url(#lb-pork)" filter="url(#lb-crust)"/>
+      <g fill="none" stroke-linecap="round" filter="url(#lb-rough)">${shreds}</g>
+      <g fill="none" stroke-linecap="round">${gloss}</g>
+      <path d="${blob}" fill="url(#lb-shade)" opacity=".7"/>`);
+  }
+
+  /* ---------- Salsas y quesos: capa con chorreados ---------- */
+  function dripPath(top, base, drips){
+    let d = `M10 ${base} C10 ${top} 70 ${top - 2} 150 ${top} C230 ${top + 2} 290 ${top} 290 ${base}`;
+    let prev = 290;
+    [...drips].sort((a, b) => b[0] - a[0]).forEach(([x, len, w], i) => {
+      // borde inferior levemente ondulado entre gotas
+      d += ` Q${f((prev + x + w) / 2)} ${f(base + (i % 2 ? 1.6 : -.8))} ${f(x + w)} ${base}`;
+      // gota: cuello estrecho y bulbo redondeado
+      d += ` C${f(x + w * .9)} ${f(base + 2)} ${f(x + w * .42)} ${f(base + len * .3)} ${f(x + w * .45)} ${f(base + len * .62)}`
+         + ` C${f(x + w * .5)} ${f(base + len * 1.02)} ${f(x - w * .5)} ${f(base + len * 1.02)} ${f(x - w * .45)} ${f(base + len * .62)}`
+         + ` C${f(x - w * .42)} ${f(base + len * .3)} ${f(x - w * .9)} ${f(base + 2)} ${f(x - w)} ${base}`;
+      prev = x - w;
+    });
+    return d + ` Q${f((prev + 10) / 2)} ${base + 1} 10 ${base}Z`;
+  }
+  function sauceLayer({ h, top, base, drips, fill, edge, extra = "" }){
+    const d = dripPath(top, base, drips);
+    let dots = "";
+    drips.forEach(([x, len, w]) => {
+      dots += `<ellipse cx="${f(x - w * .18)}" cy="${f(base + len * .78)}" rx="${f(Math.max(.9, w * .16))}" ry="${f(Math.max(1.2, len * .1))}" fill="#fff" opacity=".55"/>`;
+    });
+    return wrap(h, `
+      <path d="${d}" transform="translate(0 3)" fill="#000" opacity=".4" filter="url(#lb-blur-s)"/>
+      <g filter="url(#lb-rough)">
+        <path d="${d}" fill="url(#${fill})" stroke="${edge}" stroke-width=".8" stroke-opacity=".5"/>
+        ${extra}
+      </g>
+      <path d="M28 ${top + 3} Q150 ${top - 2} 272 ${top + 3}" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".4" filter="url(#lb-blur-s)"/>
+      <path d="M58 ${top + 2.6} Q110 ${top + .4} 156 ${top + 1}" fill="none" stroke="#fff" stroke-width=".9" stroke-linecap="round" opacity=".75"/>
+      <path d="M190 ${top + 1.6} Q225 ${top + 1} 248 ${top + 2.2}" fill="none" stroke="#fff" stroke-width=".7" stroke-linecap="round" opacity=".5"/>
+      ${dots}`);
+  }
+  const sauceBbq = () => sauceLayer({
+    h: 34, top: 4, base: 15, fill: "lb-bbq", edge: "#1a0402",
+    drips: [[28, 7, 6], [58, 14, 7], [96, 5, 5], [131, 17, 8], [176, 8, 6], [214, 13, 7], [252, 4, 5], [274, 10, 6]]
+  });
+  const sauceGlobs = (r, n, col) => {
+    let s = "";
+    for (let i = 0; i < n; i++)
+      s += `<ellipse cx="${f(between(r, 30, 270))}" cy="${f(between(r, 7, 11))}" rx="${f(between(r, 6, 16))}" ry="${f(between(r, 1.2, 2.4))}" fill="${col}" opacity=".35"/>`;
+    return s;
+  };
+  const cheese = () => sauceLayer({
+    h: 46, top: 4, base: 16, fill: "lb-cheddar", edge: "#b8690c",
+    drips: [[20, 22, 12], [58, 9, 8], [98, 27, 11], [142, 12, 9], [186, 25, 12], [228, 7, 7], [266, 19, 11]],
+    extra: sauceGlobs(rng(14), 6, "#fff3b0")
+  });
+  const cheeseMozz = () => sauceLayer({
+    h: 48, top: 4, base: 16, fill: "lb-mozz", edge: "#bfa46a",
+    drips: [[26, 26, 9], [64, 12, 11], [106, 29, 8], [150, 16, 10], [194, 30, 9], [236, 11, 10], [272, 22, 8]],
+    extra: sauceGlobs(rng(31), 7, "#d6a55a")
+  });
+  const saucePink = () => sauceLayer({
+    h: 30, top: 4, base: 14, fill: "lb-pink", edge: "#b85a46",
+    drips: [[40, 9, 7], [88, 5, 6], [136, 12, 8], [190, 7, 6], [240, 11, 7], [272, 5, 5]]
+  });
+
+  /* ---------- Carne a la parrilla: costra, marcas y jugos ---------- */
+  function patty(variant){
+    const r = rng(variant ? 44 : 33);
+    const side = variant ? "lb-patty2-side" : "lb-patty-side";
+    const topG = variant ? "lb-patty2-top" : "lb-patty-top";
+    const bottom = variant ? 50 : 54;
+    const body = `M8 16 L8 ${bottom - 16} C8 ${bottom - 4} 34 ${bottom} 150 ${bottom} C266 ${bottom} 292 ${bottom - 4} 292 ${bottom - 16} L292 16 Z`;
+    let marks = "";
+    for (let x = -10; x < 300; x += 28){
+      const x2 = variant ? x - 26 : x + 26;
+      marks += `<line x1="${x}" y1="3" x2="${x2}" y2="29" stroke="#140804" stroke-width="5.5" stroke-linecap="round" opacity=".75"/>`
+             + `<line x1="${x + 4}" y1="3" x2="${x2 + 4}" y2="29" stroke="#a06a42" stroke-width="1" opacity=".35"/>`;
+    }
+    let crumbs = "";
+    for (let i = 0; i < 70; i++)
+      crumbs += `<circle cx="${f(between(r, 12, 288))}" cy="${f(between(r, 22, bottom - 4))}" r="${f(between(r, .8, 2.2))}" fill="${pick(r, ["#8a5532", "#1c0c05", "#6b3b20", "#a46b44"])}" opacity=".7"/>`;
+    let juice = "";
+    for (let i = 0; i < 16; i++)
+      juice += `<ellipse cx="${f(between(r, 30, 270))}" cy="${f(between(r, 9, 23))}" rx="${f(between(r, 1.2, 3.2))}" ry="${f(between(r, .6, 1.3))}" fill="#fff" opacity="${f(between(r, .25, .6))}"/>`;
+    for (let i = 0; i < 6; i++){
+      const x = between(r, 30, 270);
+      juice += `<path d="M${f(x)} 24 q1 ${f(between(r, 6, 14))} 2 ${f(between(r, 10, 18))}" stroke="#ffd8b0" stroke-width="1.2" opacity=".3" fill="none"/>`;
+    }
+    return wrap(bottom + 2, `
+      <path d="${body}" fill="url(#${side})" filter="url(#lb-crust)"/>
+      <g>${crumbs}</g>
+      <path d="${body}" fill="url(#lb-shade)"/>
+      <ellipse cx="150" cy="16" rx="142" ry="12" fill="url(#${topG})" filter="url(#lb-crust)"/>
+      <g clip-path="url(#lb-cp-top)">${marks}</g>
+      <ellipse cx="150" cy="16" rx="141" ry="11.5" fill="none" stroke="#120603" stroke-width="2" opacity=".55"/>
+      <ellipse cx="120" cy="12" rx="60" ry="4" fill="url(#lb-hl)" opacity=".35"/>
+      ${juice}`);
+  }
+
+  /* ---------- Papas crispy / ripio: hilos de papa dorados ---------- */
+  function fries(){
+    const r = rng(17);
+    let sticks = "";
+    for (let i = 0; i < 190; i++){
+      const len = between(r, 14, 34), w = between(r, 2.6, 4);
+      const x = between(r, 18, 282), dx = (x - 150) / 135;
+      const y = between(r, 9 + 12 * dx * dx, 32), a = between(r, -32, 32);
+      const fill = r() < .18 ? "#c88324" : "url(#lb-fry)";
+      sticks += `<rect x="${f(-len / 2)}" y="${f(-w / 2)}" width="${f(len)}" height="${f(w)}" rx="${f(w / 2)}" fill="${fill}" stroke="#9a5a12" stroke-width=".5" transform="translate(${f(x)} ${f(y)}) rotate(${f(a)})"/>`;
+    }
+    return wrap(40, `
+      <ellipse cx="150" cy="33" rx="140" ry="5" fill="#000" opacity=".4" filter="url(#lb-blur)"/>
+      <g filter="url(#lb-grain)">${sticks}</g>`);
+  }
+
+  /* ---------- Pollo empanado: tiras con apanado irregular ---------- */
+  function chicken(){
+    const r = rng(23);
+    const pieces = [[62, 32, 58, 19, -6], [238, 33, 56, 18, -3], [150, 27, 61, 21, 4]];
+    let out = "";
+    pieces.forEach(([cx, cy, rx, ry, a]) => {
+      let crumbs = "";
+      for (let i = 0; i < 34; i++){
+        const t = r() * Math.PI * 2, d = Math.sqrt(r()) * .85;
+        crumbs += `<circle cx="${f(Math.cos(t) * rx * d)}" cy="${f(Math.sin(t) * ry * d)}" r="${f(between(r, 1.2, 3))}" fill="${pick(r, ["#fbe0a0", "#c27f30", "#e9b45a", "#9e5f22"])}" opacity=".85"/>`;
+      }
+      out += `<g transform="translate(${cx} ${cy}) rotate(${a})">
+        <ellipse cy="${ry * .7}" rx="${rx}" ry="${ry * .5}" fill="#000" opacity=".4" filter="url(#lb-blur)"/>
+        <ellipse rx="${rx}" ry="${ry}" fill="url(#lb-chicken)" filter="url(#lb-crust)"/>
+        <g filter="url(#lb-rough)">${crumbs}</g>
+        <ellipse cx="${-rx * .3}" cy="${-ry * .45}" rx="${rx * .45}" ry="${ry * .25}" fill="url(#lb-hl)" opacity=".7"/>
+        <ellipse rx="${rx}" ry="${ry}" fill="url(#lb-shade)"/></g>`;
+    });
+    return wrap(58, out);
+  }
+
+  /* ---------- Aros de cebolla apanados con glaseado BBQ ---------- */
+  function onionRings(){
+    const r = rng(29);
+    const rings = [[48, 27, -8], [184, 26, 6], [116, 28, 4], [252, 27, -6]];
+    let out = `<ellipse cx="150" cy="46" rx="140" ry="5" fill="#000" opacity=".4" filter="url(#lb-blur)"/>`;
+    rings.forEach(([cx, cy, a]) => {
+      const d = ellipsePath(0, 0, 36, 20) + ellipsePath(0, -2, 15, 7.5);
+      let glaze = "";
+      for (let i = 0; i < 6; i++){
+        const t = r() * Math.PI * 2;
+        glaze += `<ellipse cx="${f(Math.cos(t) * 26)}" cy="${f(Math.sin(t) * 13)}" rx="${f(between(r, 5, 10))}" ry="${f(between(r, 2, 3.5))}" fill="#5a170a" opacity=".55"/>`
+               + `<ellipse cx="${f(Math.cos(t) * 26 - 2)}" cy="${f(Math.sin(t) * 13 - 1)}" rx="2" ry=".8" fill="#fff" opacity=".7"/>`;
+      }
+      out += `<g transform="translate(${cx} ${cy}) rotate(${a})">
+        <path d="${d}" fill-rule="evenodd" fill="url(#lb-ring)" filter="url(#lb-crust)"/>
+        <ellipse cy="-2" rx="15" ry="7.5" fill="none" stroke="#5e300f" stroke-width="2.2" opacity=".7"/>
+        ${glaze}
+        <path d="M-24 -13 Q0 -21 24 -13" fill="none" stroke="#fff4d6" stroke-width="2" stroke-linecap="round" opacity=".4" filter="url(#lb-blur-s)"/></g>`;
+    });
+    return wrap(52, out);
+  }
+
+  /* ---------- Tocino: tiras onduladas con veta de grasa ---------- */
+  function bacon(){
+    const strip = (y0, phase, th) => {
+      let topPts = [], botPts = [];
+      for (let x = 10; x <= 290; x += 6){
+        const yt = y0 + 4.6 * Math.sin(x / 24 + phase);
+        topPts.push(`${x} ${f(yt)}`);
+        botPts.unshift(`${x} ${f(yt + th + 1.4 * Math.sin(x / 13 + phase))}`);
+      }
+      const d = `M${topPts.join(" L")} L${botPts.join(" L")}Z`;
+      let hl = `M${topPts.map(p => { const [x, y] = p.split(" "); return `${x} ${f(+y + th * .45)}`; }).join(" L")}`;
+      return `<path d="${d}" fill="url(#lb-bacon)" stroke="#4a1208" stroke-width="1" filter="url(#lb-grain)"/>
+              <path d="${hl}" fill="none" stroke="#fff6e4" stroke-width="1" opacity=".45"/>`;
+    };
+    return wrap(40, `
+      <ellipse cx="150" cy="34" rx="138" ry="4" fill="#000" opacity=".4" filter="url(#lb-blur)"/>
+      ${strip(17, 1.9, 14)}${strip(8, 0, 14)}`);
+  }
+
+  const BUILDERS = {
+    "bun-top": bunTop, "bun-bottom": bunBottom, "pickles": pickles,
+    "pulled-pork": pulledPork, "sauce-bbq": sauceBbq, "cheese": cheese,
+    "cheese-mozz": cheeseMozz, "patty": () => patty(false), "patty2": () => patty(true),
+    "fries": fries, "sauce-pink": saucePink, "chicken": chicken,
+    "onion-rings": onionRings, "bacon": bacon
+  };
+  const cache = {};
+
+  return {
+    defs: DEFS,
+    svg(shape){
+      if (!BUILDERS[shape]) return "";
+      return cache[shape] || (cache[shape] = BUILDERS[shape]());
+    }
+  };
+})();
+
+// Degradados y filtros compartidos por todas las ilustraciones
+document.body.insertAdjacentHTML("afterbegin", ING.defs);
+
+/* Dibuja la ilustración dentro de una capa según su clase layer--forma */
+function paintLayer(el, shape){
+  el.insertAdjacentHTML("afterbegin", ING.svg(shape));
+}
+
+/* ============================================================
    DATOS DE LAS HAMBURGUESAS
    Cada capa define: número, nombre, forma visual (clase CSS)
    y lado donde aparece su etiqueta (para alternar izquierda/derecha).
@@ -820,6 +1116,7 @@ function renderBurger(key){
     div.className = `layer layer--${layer.shape}`;
     div.style.setProperty("--i", i);
     div.dataset.index = i;
+    paintLayer(div, layer.shape);
 
     const badge = document.createElement("div");
     badge.className = `badge badge-${layer.side}`;
@@ -907,6 +1204,14 @@ for (let i = 0; i < 10; i++){
   dot.style.animationDuration = `${5 + Math.random() * 3}s`;
   emberField.appendChild(dot);
 }
+
+// Mini hamburguesa del hero con las mismas ilustraciones
+document.querySelectorAll(".hero-mini-burger .layer").forEach((el, i, all) => {
+  const shape = [...el.classList].find(c => c.startsWith("layer--")).slice(7);
+  el.style.position = "relative";
+  el.style.zIndex = all.length - i;
+  paintLayer(el, shape);
+});
 
 // Año del footer
 document.getElementById("footerNote").textContent =
